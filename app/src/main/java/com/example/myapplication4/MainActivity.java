@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
         btn = findViewById(R.id.button);
         btn.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity2.class);
+            if (!edittxt.getText().toString().isEmpty()){
+                intent.putExtra("mykey1", edittxt.getText().toString());
+            }
             startActivity(intent);
         });
 
