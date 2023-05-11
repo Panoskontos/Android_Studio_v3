@@ -21,7 +21,10 @@ public class MainActivity3 extends AppCompatActivity {
 
 //        create or open database
         sqLiteDatabase = openOrCreateDatabase("DB1.db", MODE_PRIVATE, null);
-
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + "USER" + "(" +
+                "username" + " TEXT," +
+                "email" + " TEXT PRIMARY KEY)");
+        sqLiteDatabase.execSQL("INSERT OR IGNORE INTO USER VALUES('panos','ppp@gmail.com')");
 
     }
 
