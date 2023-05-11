@@ -3,6 +3,7 @@ package com.example.myapplication4;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -37,7 +38,13 @@ public class MainActivity3 extends AppCompatActivity {
         Toast.makeText(this, "User Added", Toast.LENGTH_SHORT).show();
     }
     public void select(View view){
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM USER",null);
+        StringBuilder stringBuilder = new StringBuilder();
+        while(cursor.moveToNext()){
+            stringBuilder.append("Fullname: ").append(cursor.getString(0)).append("\n");
+            stringBuilder.append("Email: ").append(cursor.getString(1)).append("\n");
 
+        }
     }
 
     private void showMessage(String title, String msg){
