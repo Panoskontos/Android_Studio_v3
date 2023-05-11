@@ -15,5 +15,6 @@ public class MainActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         txtview = findViewById(R.id.editTextTextPersonName);
         String received = getIntent().getStringExtra("mykey1");
+        txtview.setText(received);
     }
 }
