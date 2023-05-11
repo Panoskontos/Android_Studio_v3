@@ -42,9 +42,9 @@ public class MainActivity3 extends AppCompatActivity {
         StringBuilder stringBuilder = new StringBuilder();
         while(cursor.moveToNext()){
             stringBuilder.append("Fullname: ").append(cursor.getString(0)).append("\n");
-            stringBuilder.append("Email: ").append(cursor.getString(1)).append("\n");
-
+            stringBuilder.append("Email: ").append(cursor.getString(1)).append("\n\n");
         }
+        showMessage("Users", stringBuilder.toString());
     }
 
     private void showMessage(String title, String msg){
