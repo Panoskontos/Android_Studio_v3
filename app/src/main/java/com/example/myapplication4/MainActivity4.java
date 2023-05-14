@@ -16,6 +16,7 @@ import android.widget.TextView;
 public class MainActivity4 extends AppCompatActivity implements LocationListener {
 
     TextView locationtxt;
+    TextView speed;
     LocationManager locationManager;
 
     @Override
@@ -24,6 +25,7 @@ public class MainActivity4 extends AppCompatActivity implements LocationListener
         setContentView(R.layout.activity_main4);
 
         locationtxt = findViewById(R.id.textView);
+        speed = findViewById(R.id.textView2);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
     }
@@ -45,5 +47,6 @@ public class MainActivity4 extends AppCompatActivity implements LocationListener
     @Override
     public void onLocationChanged(@NonNull Location location) {
         locationtxt.setText(location.getLatitude()+","+location.getLongitude());
+        speed.setText(location.getSpeed()+"");
     }
 }
