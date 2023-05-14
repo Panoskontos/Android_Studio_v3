@@ -18,7 +18,15 @@ public class MainActivity4 extends AppCompatActivity implements LocationListener
     TextView locationtxt;
     TextView speed;
     TextView time;
+    TextView timeprevious;
+
+    TextView speedprevious;
+
     LocationManager locationManager;
+    Location previousLocation;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +36,9 @@ public class MainActivity4 extends AppCompatActivity implements LocationListener
         locationtxt = findViewById(R.id.textView);
         speed = findViewById(R.id.textView2);
         time = findViewById(R.id.textView3);
+        timeprevious = findViewById(R.id.textView4);
+        speedprevious = findViewById(R.id.textView6);
+
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
     }
@@ -49,11 +60,37 @@ public class MainActivity4 extends AppCompatActivity implements LocationListener
     @Override
     public void onLocationChanged(@NonNull Location location) {
 
-//        dv/dt and save location
-
+//        / calculate the time elapsed since the location was obtained
+//        long timeElapsed = System.currentTimeMillis() - location.getTime();
+////        dv/dt and save location
+//        locationtxt.setText(location.getLatitude()+","+location.getLongitude());
+//        speed.setText(location.getSpeed()+"");
+//        time.setText(location.getTime()+"");
+        long timeElapsed = System.currentTimeMillis() - location.getTime();
+        // display the current location data
         locationtxt.setText(location.getLatitude()+","+location.getLongitude());
         speed.setText(location.getSpeed()+"");
         time.setText(location.getTime()+"");
+        // update the previous location and display its time
+        if (previousLocation != null) {
+            long timeDifference = location.getTime() - previousLocation.getTime();
+            double timeDifferenceInSeconds = timeDifference / 1000.0;
+            timeprevious.setText(previousLocation.getTime()+"");
+            speedprevious.setText(previousLocation.getSpeed()+"");
+            float speedDifference = location.getSpeed() - previousLocation.getSpeed();
 
+//            time diff
+            TextView timeDifferenceText = findViewById(R.id.textView5);
+            timeDifferenceText.setText(String.format("%.2f sec", timeDifferenceInSeconds));
+
+//            speed diff
+            TextView speedDifferenceText = findViewById(R.id.textView7);
+            speedDifferenceText.setText(String.format("%.2f m/s", speedDifference));
+
+
+        }
+
+//        assign the location to previous location
+        previousLocation = location;
     }
 }
