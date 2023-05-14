@@ -88,8 +88,10 @@ public class MainActivity4 extends AppCompatActivity implements LocationListener
             TextView speedDifferenceText = findViewById(R.id.textView7);
             speedDifferenceText.setText(String.format("%.2f km/h", speedDifferenceKilometersPerHour));
 
-            if(speedDifferenceKilometersPerHour<-0.5){
+//            losing 5 km per sec is considered a brake
+            if(speedDifferenceKilometersPerHour<-5){
                 System.out.println("Brake");
+                System.out.println(previousLocation.getLatitude()+","+previousLocation.getLongitude());
             };
 
         }
