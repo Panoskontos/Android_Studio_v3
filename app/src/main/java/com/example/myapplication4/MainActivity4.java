@@ -69,24 +69,28 @@ public class MainActivity4 extends AppCompatActivity implements LocationListener
         long timeElapsed = System.currentTimeMillis() - location.getTime();
         // display the current location data
         locationtxt.setText(location.getLatitude()+","+location.getLongitude());
-        speed.setText(location.getSpeed()+"");
+        speed.setText(location.getSpeed()* 3.6f+"");
         time.setText(location.getTime()+"");
         // update the previous location and display its time
         if (previousLocation != null) {
             long timeDifference = location.getTime() - previousLocation.getTime();
             double timeDifferenceInSeconds = timeDifference / 1000.0;
             timeprevious.setText(previousLocation.getTime()+"");
-            speedprevious.setText(previousLocation.getSpeed()+"");
-            float speedDifference = location.getSpeed() - previousLocation.getSpeed();
+            speedprevious.setText(previousLocation.getSpeed()* 3.6f+"");
 
 //            time diff
             TextView timeDifferenceText = findViewById(R.id.textView5);
             timeDifferenceText.setText(String.format("%.2f sec", timeDifferenceInSeconds));
 
 //            speed diff
+            float speedDifference = location.getSpeed() - previousLocation.getSpeed();
+            float speedDifferenceKilometersPerHour = speedDifference * 3.6f;
             TextView speedDifferenceText = findViewById(R.id.textView7);
-            speedDifferenceText.setText(String.format("%.2f m/s", speedDifference));
+            speedDifferenceText.setText(String.format("%.2f km/h", speedDifferenceKilometersPerHour));
 
+            if(speedDifferenceKilometersPerHour<-0.5){
+                System.out.println("Brake");
+            };
 
         }
 
