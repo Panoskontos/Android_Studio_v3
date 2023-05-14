@@ -17,6 +17,7 @@ public class MainActivity4 extends AppCompatActivity implements LocationListener
 
     TextView locationtxt;
     TextView speed;
+    TextView time;
     LocationManager locationManager;
 
     @Override
@@ -26,6 +27,7 @@ public class MainActivity4 extends AppCompatActivity implements LocationListener
 
         locationtxt = findViewById(R.id.textView);
         speed = findViewById(R.id.textView2);
+        time = findViewById(R.id.textView3);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
     }
@@ -46,7 +48,12 @@ public class MainActivity4 extends AppCompatActivity implements LocationListener
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
+
+//        dv/dt and save location
+
         locationtxt.setText(location.getLatitude()+","+location.getLongitude());
         speed.setText(location.getSpeed()+"");
+        time.setText(location.getTime()+"");
+
     }
 }
